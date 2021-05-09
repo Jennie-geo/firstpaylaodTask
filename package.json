@@ -1,0 +1,28 @@
+{
+  "name": "firstpaylaodTask",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jennie-geo/firstpaylaodTask.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jennie-geo/firstpaylaodTask/issues"
+  },
+  "homepage": "https://github.com/Jennie-geo/firstpaylaodTask#readme",
+  "dependencies": {
+    "dotenv": "^8.6.0",
+    "express": "^4.17.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^5.12.7"
+  }
+}
