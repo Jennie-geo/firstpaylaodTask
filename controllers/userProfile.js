@@ -17,11 +17,11 @@ const getDetails = (req, res) => {
 const createDetails = (req, res) => {
      const name = req.body.name;
      const email = req.body.email;
-     const country = req.body.country;
-     Person.findOne({ email }).then(emailExists => {
-
+     const country = req.body.country; 
+     
+     Person.findOne({email}).then(emailExists => {
+         
          if(emailExists) {
-             console.log(emailExists)
              return res.status(409).json({ success: false, msg: "Email already exists"})
          }
          const person = new Person({
@@ -30,6 +30,9 @@ const createDetails = (req, res) => {
             email: email,
             country: country
         })
+        if(name === " " || email === " " || country === " ") {
+            return res.status(400).json({ success: false, msg: "Please, insert your name, email and country."})
+        }
         person.save().then(data => {
             console.log('Data created')
              res.status(201).json({ success: true, person: {
