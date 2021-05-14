@@ -15,27 +15,34 @@ const getDetails = (req, res) => {
 };
 
 const createDetails = (req, res) => {
-     
-   const person = new Person({
-    _id: new mongoose.Types.ObjectId(),
-    name: req.body.name,
-    email: req.body.email,
-    country: req.body.country
-})
- person.save()
- .then(data => {
-     console.log('Data created')
-     return res.status(201).json({ success: true, person: {
-         details: data
-     }})
-     
- })
-  .catch(err => {
-    console.log(err)
-    res.status(400).json({ success: false, msg: err})
-  })
-  
- };
+     const name = req.body.name;
+     const email = req.body.email;
+     const country = req.body.country;
+     Person.findOne({ email }).then(emailExists => {
+
+         if(emailExists) {
+             console.log(emailExists)
+             return res.status(409).json({ success: false, msg: "Email already exists"})
+         }
+         const person = new Person({
+            _id: new mongoose.Types.ObjectId(),
+            name: name,
+            email: email,
+            country: country
+        })
+        person.save().then(data => {
+            console.log('Data created')
+             res.status(201).json({ success: true, person: {
+                details: data
+            }})
+        })
+     })   
+     .catch(err => {
+       console.log(err)
+       res.status(400).json({ success: false, msg: err})
+    }) 
+ }; 
+
 const singleUserDetails = (req, res) =>{
       const id = req.params.userId;
      Person.findById(id).then(doc => {
@@ -60,7 +67,7 @@ const updateUserDetails = (req, res) => {
     for(const ops of req.body) {
         updateOps[ops.propName] = ops.value;
     }
-    Person.update({ _id: id}, { $set: updateOps }).exec().then(result => {
+    Person.updateOne({ _id: id}, { $set: updateOps }).exec().then(result => {
         console.log(result)
         res.status(200).json({ success: true, data: result})
     }).catch(err => {

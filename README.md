@@ -10,10 +10,12 @@
  router.get('/api/people/:userId', singleUserDetails) fetches a single data from the database using the id of the person and attached it in the api
 
  # update route
- router.patch('/api/people/:userId', updateUserDetails) updates a single data in the database using the id of the person and attached it in the api
+ router.patch('/api/people/:userId', updateUserDetails) updates a single data in the database using the id of the person and attached to the route. user detail with be updated as follows [ {"propName":"name" "value": "the new name"}, {"propName": "email", "value": "the new email"}, {"propName": "country", "value":"the new country"} ]
 
  # delete route
  router.delete('/api/people/:userId', deleteUserDetails) delete a single data in the database using the id of the person and attached it in the api
+
+ 
 
  # hosted link to heroku
  firstdeployment1.herokuapp.com is the link to my heroku page where i deployed the tasks
